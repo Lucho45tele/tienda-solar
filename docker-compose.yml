@@ -1,0 +1,19 @@
+services:
+  db:
+    image: public.ecr.aws/docker/library/postgres:16-alpine
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: solar_user
+      POSTGRES_PASSWORD: solar_password
+      POSTGRES_DB: solar_db
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U solar_user -d solar_db"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  pgdata:
