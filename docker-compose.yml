@@ -1,8 +1,7 @@
 services:
   db:
     image: public.ecr.aws/docker/library/postgres:16-alpine
-    ports:
-      - "5433:5432"
+    network_mode: host
     environment:
       POSTGRES_USER: solar_user
       POSTGRES_PASSWORD: solar_password
